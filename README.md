@@ -7,6 +7,12 @@ Modelado problema Titanic y publicación de servicios Flask para administración
 > - scikit-learn
 > - Flask
 
+**Instalación de las dependencias:**
+```
+pip install -r requirements.txt
+```
+
+
 ## Servicios
 ### /titanic/predict (POST)
 **Input:**
