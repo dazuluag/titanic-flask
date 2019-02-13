@@ -39,6 +39,27 @@ def predict():
         print('train first')
         return 'no model here'
 
+if __name__ == '__main__':
+    try:
+        #port = int(sys.argv[1])
+        port = os.environ['SURA_APP_PORT']
+    except Exception as e:
+        port = 8000
+    try:
+        clf = joblib.load(model_file_name)
+        print('model loaded')
+        model_columns = joblib.load(model_columns_file_name)
+        print('model columns loaded')
+    except Exception as e:
+        print('No model here')
+        print('Train first')
+        print(str(e))
+        clf = None
+    app.run(host='0.0.0.0', port=port, debug=True)
+
+
+
+'''
 @app.route('/titanic/train', methods=['GET'])
 def train():
     # using random forest as an example
@@ -78,21 +99,4 @@ def wipe():
     except Exception as e:
         print(str(e))
         return 'Could not remove and recreate the model directory'
-
-if __name__ == '__main__':
-    try:
-        #port = int(sys.argv[1])
-        port = os.environ['SURA_APP_PORT']
-    except Exception as e:
-        port = 8000
-    try:
-        clf = joblib.load(model_file_name)
-        print('model loaded')
-        model_columns = joblib.load(model_columns_file_name)
-        print('model columns loaded')
-    except Exception as e:
-        print('No model here')
-        print('Train first')
-        print(str(e))
-        clf = None
-    app.run(host='0.0.0.0', port=port, debug=True)
+'''
