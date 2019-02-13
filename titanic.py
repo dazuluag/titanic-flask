@@ -3,9 +3,10 @@ import os
 import shutil
 import time
 import traceback
-import portalocker
+
 import pandas as pd
 from sklearn.externals import joblib
+from sklearn.ensemble import RandomForestClassifier as rf
 
 from flask import Flask, request, jsonify
 app = Flask(__name__)
@@ -42,7 +43,6 @@ def predict():
 def train():
     # using random forest as an example
     # can do the training separately and just update the pickles
-    from sklearn.ensemble import RandomForestClassifier as rf
     df = pd.read_csv(training_data)
     df_ = df[include]
     categoricals = []  # going to one-hot encode categorical variables
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     try:
         port = int(sys.argv[1])
     except Exception as e:
-        port = 9090
+        port = 5000
     try:
         clf = joblib.load(model_file_name)
         print('model loaded')
