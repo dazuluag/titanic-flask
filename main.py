@@ -81,9 +81,10 @@ def wipe():
 
 if __name__ == '__main__':
     try:
-        port = int(sys.argv[1])
+        #port = int(sys.argv[1])
+        port = os.environ['SURA_APP_PORT']
     except Exception as e:
-        port = 5000
+        port = 8000
     try:
         clf = joblib.load(model_file_name)
         print('model loaded')
