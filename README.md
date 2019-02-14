@@ -30,21 +30,3 @@ pip install -r requirements.txt
     "prediction": "[1, 1, 0, 0]"
 }
 ```
-### /titanic/train (GET)
-**Input:**
-```
-Not Input
-```
-**Output:**
-```
-'Success'
-```
-### /titanic/wipe (GET)
-**Input:**
-```
-Not Input
-```
-**Output:**
-```
-'Model wiped'
-```
