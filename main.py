@@ -1,29 +1,24 @@
+# Importamos las librerías necesarias
 import sys
 import os
-import shutil
-import time
 import traceback
-
 import pandas as pd
 from sklearn.externals import joblib
-from sklearn.ensemble import RandomForestClassifier as rf
-
 from flask import Flask, request, jsonify
+
+# Creamos la aplicación Flask para publicación de servicio
 app = Flask(__name__)
 
-# inputs
-training_data = 'data/train.csv'
-include = ['Age', 'Sex', 'Embarked', 'Survived']
-dependent_variable = include[-1]
-
+# Cargamos el modelo entranado desde archivos pickle
 model_directory = 'model'
 model_file_name = '%s/model.pkl' % model_directory
 model_columns_file_name = '%s/model_columns.pkl' % model_directory
 
-# These will be populated at training time
+# Variables para almacenar el modelo entrenado
 model_columns = None
 clf = None
 
+# Función para realizar la predicción con método POST
 @app.route('/titanic/predict', methods=['POST'])
 def predict():
     if clf:
@@ -36,9 +31,10 @@ def predict():
         except Exception as e:
             return jsonify({'error': str(e), 'trace': traceback.format_exc()})
     else:
-        print('train first')
-        return 'no model here'
+        print('Recomendamos que ejecute el entrenamiento')
+        return 'No existe o no pudo ser cargado el modelo'
 
+# Función main para lanzar el servicio Flask
 if __name__ == '__main__':
     port = None
     try:
@@ -47,12 +43,12 @@ if __name__ == '__main__':
         port = 8000
     try:
         clf = joblib.load(model_file_name)
-        print('model loaded')
+        print('Modelo cargado con éxito')
         model_columns = joblib.load(model_columns_file_name)
-        print('model columns loaded')
+        print('Columnas del modelo cargadas con éxito')
     except Exception as e:
-        print('No model here')
-        print('Train first')
+        print('No existe o no pudo ser cargado el modelo')
+        print('Recomendamos que ejecute el entrenamiento')
         print(str(e))
         clf = None
     app.run(host='0.0.0.0', port=port, debug=True)
