@@ -2,7 +2,7 @@ FROM python:3
 
 RUN mkdir /deploy && \
     git clone https://github.com/dazulu4/titanic-flask.git /deploy/app && \
-    pip3 install -r /Python/app/requirements.txt
+    pip3 install -r /deploy/app/requirements.txt
 
 WORKDIR /deploy/app
 EXPOSE 8888
