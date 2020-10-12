@@ -48,9 +48,9 @@ set FLASK_ENV=development
 ## Instalación con Docker
 ### Construyendo la imagen docker
 ```
-sudo docker build -t titanic-docker:latest .
+docker build -t titanic-docker:latest .
 ```
 ### Ejecutando la imagen docker
 ```
-sudo docker run -d -p 5000:5000 titanic-docker:latest
+docker run -d -p 7000:7000 titanic-docker:latest
 ```
