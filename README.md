@@ -44,3 +44,13 @@ export FLASK_ENV=development
 ```
 set FLASK_ENV=development
 ```
+
+##Instalación con Docker
+###Construyendo la imagen docker
+```
+sudo docker build -t titanic-docker:latest .
+```
+###Ejecutando la imagen docker
+```
+sudo docker run -d -p 5000:5000 titanic-docker:latest
+```
