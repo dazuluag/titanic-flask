@@ -5,10 +5,9 @@ RUN mkdir /deploy && \
     pip3 install -r /deploy/app/requirements.txt
 
 WORKDIR /deploy/app
-EXPOSE 8888
-ENV SURA_APP_PORT=8888
+EXPOSE 7001
+ENV SURA_APP_PORT=7001
 
 USER daemon
 
 CMD ["python3", "/deploy/app/main.py"]
-
